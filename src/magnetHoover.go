@@ -1,53 +1,38 @@
 package main
 
 import (
+	"config"
 	"encoding/json"
-	"time"
 )
 
-var configFile = "config.json"
-var config struct {
-	intervall time.Duration
-	urls      []string
-}
+var config Config.config
+
+const SIGKILL = 9
+const SIGHUP = 5
+
+var signal chan byte
 
 func main() {
-	readFromFile := readConfigFromCmdl()
-	if readFromFile {
-		readConfig()	
-	}	
+	readFile := config.FromCmdl(&config)
+	if  readFile {
+		config.FromCmdl(&config)
+	}
 	run := true
-	while run {
+	for run {
 		select {
-		case <-time.After(config.intervall * time.Minute):
-			checkSites()
+		case <- config.Intervall.After():
+			poll()
 		case s := <-signal:
 			switch s {
-				case  SIGKILL:
-					run = false
-				case SIGHUP:
-					readConfigFromFile()		
-			}
-			if s == readConfigFromFile {
+			case SIGKILL:
 				run = false
-			} else 
-			readConfigFromFile()
+			case SIGHUP:
+				readConfigFromFile()
+			}
 		}
 	}
-
-	// Sleep for some time
-	// Scan all Feeds, add ne feeds
-	// on Sighup and Start: Read config, read feeds
 }
 
+func poll() {
 
-
-func readConfigFromFile() {
-	// read configuration
-	configFile, err := os.Open("config.json")
-	if err != nil {
-		panic(err)
-	}
-	dec := json.NewDecoder(configFile)
-	err = dec.Decode(&me.n)
 }
