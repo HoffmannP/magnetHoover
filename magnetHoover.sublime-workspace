@@ -1,0 +1,689 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"proe",
+				"project"
+			],
+			[
+				"sef",
+				"sefuBase"
+			],
+			[
+				"v",
+				"v	bool ν"
+			],
+			[
+				"err",
+				"error	error ν"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"T",
+				"Timeout	bool ƒ"
+			],
+			[
+				"Prin",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"sel",
+				"selected"
+			],
+			[
+				"read",
+				"readMounts"
+			],
+			[
+				"None",
+				"None"
+			],
+			[
+				"hi",
+				"hijack"
+			],
+			[
+				"mount",
+				"mountPoint"
+			],
+			[
+				"array_p",
+				"array_push"
+			],
+			[
+				"table",
+				"tablename"
+			],
+			[
+				"covaria",
+				"covariates"
+			],
+			[
+				"sq",
+				"sql_filter"
+			],
+			[
+				"str_r",
+				"str_repeat"
+			],
+			[
+				"bind_",
+				"maxdb_bind_result"
+			],
+			[
+				"pro",
+				"proband_id"
+			],
+			[
+				"templa",
+				"template_id"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"CSS",
+				"CSS-Designer"
+			],
+			[
+				"value",
+				"valueclass"
+			],
+			[
+				"value_val",
+				"value_validate_class"
+			],
+			[
+				"prot",
+				"prototype"
+			],
+			[
+				"css",
+				"css_value"
+			],
+			[
+				"allo",
+				"allowed_value"
+			],
+			[
+				"css_",
+				"css_validator"
+			],
+			[
+				"reg",
+				"regEx"
+			],
+			[
+				"expand",
+				"expand_to"
+			],
+			[
+				"proper",
+				"property_spread"
+			],
+			[
+				"func",
+				"function_arguments"
+			],
+			[
+				"click",
+				"clickevent"
+			],
+			[
+				"draw",
+				"draw_property"
+			],
+			[
+				"dra",
+				"draw_property"
+			],
+			[
+				"d",
+				"d"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"antwort",
+				"antwort_typ"
+			],
+			[
+				"inline-b",
+				"inline-block"
+			],
+			[
+				"border-c",
+				"border-color"
+			],
+			[
+				"join",
+				"join_feld"
+			],
+			[
+				"fet",
+				"fetch_num"
+			],
+			[
+				"GROUP",
+				"GROUP_CONCAT"
+			],
+			[
+				"AS",
+				"AS"
+			],
+			[
+				"_",
+				"_id"
+			],
+			[
+				"testlei",
+				"testleiter_id"
+			],
+			[
+				"proband",
+				"proband"
+			],
+			[
+				"chr",
+				"chromosom_dna"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"p",
+				"point2"
+			],
+			[
+				"color",
+				"colors"
+			],
+			[
+				"save",
+				"save"
+			],
+			[
+				"representation",
+				"representation"
+			],
+			[
+				"indi",
+				"individual"
+			],
+			[
+				"po",
+				"point2"
+			],
+			[
+				"chromo",
+				"chromosoms"
+			],
+			[
+				"param",
+				"parameter"
+			],
+			[
+				"ge",
+				"generalProperty"
+			],
+			[
+				"chroms",
+				"chromosoms"
+			],
+			[
+				"gen",
+				"genpool"
+			],
+			[
+				"im",
+				"im"
+			],
+			[
+				"wea",
+				"weakestTwo"
+			],
+			[
+				"fitne",
+				"fitness"
+			],
+			[
+				"fitness",
+				"fittness"
+			],
+			[
+				"chrom",
+				"chromosms"
+			],
+			[
+				"true",
+				"true"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"return",
+				"m_returnstatus"
+			],
+			[
+				"erhebung",
+				"erhebung_id"
+			],
+			[
+				"fil",
+				"filterFunc"
+			],
+			[
+				"fputs",
+				"fputcsv"
+			],
+			[
+				"array_fil",
+				"array_filter"
+			],
+			[
+				"erhID",
+				"erhebung_id"
+			],
+			[
+				"proband_",
+				"proband_id"
+			],
+			[
+				"tem",
+				"from_template"
+			],
+			[
+				"sch",
+				"schuelerWichtigkeit"
+			],
+			[
+				"le",
+				"lehrerAntworten"
+			],
+			[
+				"var",
+				"var_export"
+			],
+			[
+				"antwor",
+				"antworttyp"
+			],
+			[
+				"ant",
+				"antwortTypen"
+			],
+			[
+				"sql",
+				"sql_proband_covariaten_template_select"
+			],
+			[
+				"run",
+				"run_macro_file"
+			],
+			[
+				"prob",
+				"proband"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"loc",
+				"local"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/magnetHoover.go",
+			"settings":
+			{
+				"buffer_size": 456,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+			"settings":
+			{
+				"buffer_size": 544,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 390.0,
+		"selected_items":
+		[
+			[
+				"b:g",
+				"Build: Generate"
+			],
+			[
+				"b:B",
+				"Build: Build"
+			],
+			[
+				"",
+				"GoSublime: Authors & Contributors"
+			],
+			[
+				"bui",
+				"Build: Init"
+			],
+			[
+				"build",
+				"Build: Init"
+			],
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Discover Packages"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: u",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 381.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ber/.config/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+		"/home/ber/.config/sublime-text-2/Packages/Default/exec.py",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/9o.md",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/Default (Linux).sublime-keymap",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-settings",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/USAGE.md",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/CHANGELOG.md",
+		"/home/ber/Code/magnetHoover/mytest",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/AUTHORS.md",
+		"/home/ber/.config/sublime-text-2/Sublime Text 2.64bit/sublime_plugin.py",
+		"/home/ber/Code/magnetHoover/magnetHoover.sublime-workspace",
+		"/home/ber/Code/magnetHoover/mH.sublime-project",
+		"/home/ber/Code/magnetHoover/magnetHoover",
+		"/home/ber/Desktop/Rabatt.txt",
+		"/home/ber/Code/wolServer/src/wakeUp.go",
+		"/home/ber/Code/Converter/replace.json",
+		"/home/ber/bin/converter.sh",
+		"/home/ber/bin/convert.go",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/ber/Code/SEfU/develop/lib/sefuBase.class.php",
+		"/home/ber/Code/SEfU/develop/lib/vendor/symfony/lib/i18n/sfDateFormat.class.php",
+		"/home/ber/Code/SEfU/develop/lib/vendor/symfony/lib/i18n/sfDateTimeFormatInfo.class.php",
+		"/home/ber/Code/SEfU/develop/SEfU.sublime-project",
+		"/home/ber/Code/SEfU/develop/sefuBase.class.php",
+		"/home/ber/Code/SEfU/develop/apps/lehrer/modules/erhebung/actions/actions.class.php",
+		"/home/ber/Code/SEfU/develop/apps/lehrer/modules/erhebung/templates/uebersichtSuccess.php",
+		"/home/ber/Code/SEfU/develop/apps/lehrer/templates/_evaluationOverview.php",
+		"/home/ber/Code/SEfU/develop/config/ProjectConfiguration.class.php",
+		"/home/ber/Desktop/Go",
+		"/home/ber/Code/wakeUpCall/src/networking/netstat.go",
+		"/home/ber/Code/wakeUpCall/src/networking/ping.go",
+		"/home/ber/Code/wakeUpCall/src/networking/magic.go",
+		"/home/ber/Code/wakeUpCall/template/status.html",
+		"/home/ber/Code/wakeUpCall/src/wakeUp.go",
+		"/home/ber/Code/wakeUpCall/config.json.example",
+		"/home/ber/Code/wakeUpCall/ports",
+		"/home/ber/Code/wakeUpCall/config.json",
+		"/home/ber/Code/wakeUpCall/config.json.old",
+		"/home/ber/Code/wakeUpCall/test.go",
+		"/home/ber/Code/wakeUpCall/README",
+		"/home/ber/Code/wakeUpCall/status.html",
+		"/home/ber/Code/wakeUpCall/src/wol/magic.go",
+		"/home/ber/Code/wakeUpCall/index.template",
+		"/home/ber/Code/wakeUpCall/src/index.template",
+		"/home/ber/Code/wakeUpCall/src/wol/config.json",
+		"/home/ber/Code/wakeUpCall/testscript.sh",
+		"/home/ber/Code/wakeUpCall/wol.go/wakeUp.go",
+		"/home/ber/Code/wakeUpCall/wol.go/Makefile",
+		"/home/ber/Code/wakeUpCall/wol.go/magic.go",
+		"/home/ber/Code/wakeUpCall/src/newmath/sqrt.go",
+		"/home/ber/Code/wakeUpCall/src/testscript.sh",
+		"/home/ber/Code/wakeUpCall/wol.go/wakeUp.go~"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/ber/.config/sublime-text-2/Packages/Default",
+			"/home/ber/Code/SEfU/develop/",
+			"/home/ber/Code/SEfU/develop/apps/lehrer"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"exec",
+			"ExecCommand",
+			"close",
+			"fold",
+			"folding",
+			"sluggifyText",
+			"formatDateTime",
+			"erlaeuterung_auswertung",
+			"filterByAktiv",
+			"filterBy",
+			"STATE_PENDING"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": true,
+		"replace_history":
+		[
+			"nadia",
+			"\\t"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/magnetHoover.go",
+					"settings":
+					{
+						"buffer_size": 456,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/GoSublime.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								531,
+								531
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o:///home/ber/Code/SEfU/develop/apps/lehrer/modules/erhebung/actions":
+	{
+		"height": 118.0
+	},
+	"output.9o:///home/ber/Code/magnetHoover/src":
+	{
+		"height": 224.0
+	},
+	"output.exec":
+	{
+		"height": 130.0
+	},
+	"output.git":
+	{
+		"height": 112.0
+	},
+	"output.jslint_result_view":
+	{
+		"height": 120.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/ber/Code/magnetHoover/mH.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 309.0,
+	"status_bar_visible": true
+}
