@@ -11,6 +11,7 @@
 			"name":	"Go-Run",
 			"cmd": ["go", "run", "src/${project_base_name}.go"],
 			"file_regex": "^(.*?\\.go):([0-9]*):",
+			"path": "/usr/local/go/bin",
 			"working_dir": "$project_path",
 			"env": { "GOPATH": "/home/ber/Code/magnetHoover/" },
 			"target": "exec"
@@ -19,6 +20,7 @@
 			"name": "Go-Generate",
 			"cmd": ["go", "build", "src/${project_base_name}.go"],
 			"file_regex": "^(.*?\\.go):([0-9]*):",
+			"path": "/usr/local/go/bin",
 			"working_dir": "$project_path",
 			"env": { "GOPATH": "/home/ber/Code/magnetHoover/" }
 		}

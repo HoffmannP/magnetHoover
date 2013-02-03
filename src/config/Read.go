@@ -36,6 +36,9 @@ func FromCmdl(config* Config) error {
 	if notFromFile {
 		return nil
 	}
+	if len(config.Urls) == 1 && len(config.Urls[0]) == 0 {
+		config.Urls = []string{"http://eztv.it/shows/682/chicago-fire/"}
+	}
 	return FromFile(config)
 }
 

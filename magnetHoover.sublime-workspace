@@ -355,25 +355,45 @@
 			"file": "src/magnetHoover.go",
 			"settings":
 			{
-				"buffer_size": 456,
+				"buffer_size": 1041,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+			"file": "src/config/Read.go",
 			"settings":
 			{
-				"buffer_size": 544,
+				"buffer_size": 1332,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config.json",
+			"settings":
+			{
+				"buffer_size": 121,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "magnetHoover.sublime-project",
+			"settings":
+			{
+				"buffer_size": 622,
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Go-Run",
 	"command_palette":
 	{
-		"height": 390.0,
+		"height": 138.0,
 		"selected_items":
 		[
+			[
+				"Build",
+				"GoSublime: Open shell/build prompt"
+			],
 			[
 				"b:g",
 				"Build: Generate"
@@ -440,7 +460,20 @@
 	},
 	"file_history":
 	[
+		"/home/ber/Code/magnetHoover/config.json",
+		"/home/ber/Code/magnetHoover/src/config/Read.go",
+		"/home/ber/Code/magnetHoover/magnetHoover.sublime-project",
+		"/raid/Dropbox/Configs/sublime-text-2/Packages/Default/Preferences (Windows).sublime-settings",
+		"/raid/Dropbox/Configs/sublime-text-2/Settings/Preferences (Windows).sublime-settings",
+		"/raid/Dropbox/Configs/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/raid/Dropbox/Configs/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/ber/Code/magnetHoover/src/magnetHoover.go",
+		"/home/ber/Code/magnetHoover/src/config/Intervall.go",
 		"/home/ber/.config/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+		"/home/ber/Code/magnetHoover/src/config/parseCmdl.go",
+		"/home/ber/bin/mediaDownload.py",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/Default/exec.py",
 		"/home/ber/.config/sublime-text-2/Packages/Default/exec.py",
 		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/9o.md",
 		"/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/Default (Linux).sublime-keymap",
@@ -501,7 +534,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/ber/.config/sublime-text-2/Packages/Default",
@@ -514,6 +547,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"videoUrl",
 			"exec",
 			"ExecCommand",
 			"close",
@@ -544,7 +578,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -552,15 +586,15 @@
 					"file": "src/magnetHoover.go",
 					"settings":
 					{
-						"buffer_size": 456,
+						"buffer_size": 1041,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13,
-								13
+								997,
+								997
 							]
 						],
 						"settings":
@@ -569,25 +603,78 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 529.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/ber/Dropbox/Configs/sublime-text-2/Packages/GoSublime/GoSublime.sublime-build",
+					"file": "src/config/Read.go",
 					"settings":
 					{
-						"buffer_size": 544,
+						"buffer_size": 1332,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								531,
-								531
+								1082,
+								1082
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/GoSublime.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "config.json",
+					"settings":
+					{
+						"buffer_size": 121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								115,
+								115
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "magnetHoover.sublime-project",
+					"settings":
+					{
+						"buffer_size": 622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								524,
+								524
 							]
 						],
 						"settings":
@@ -645,7 +732,7 @@
 	},
 	"output.exec":
 	{
-		"height": 130.0
+		"height": 231.0
 	},
 	"output.git":
 	{
@@ -675,7 +762,7 @@
 		[
 			[
 				"",
-				"/home/ber/Code/magnetHoover/mH.sublime-project"
+				"/home/ber/Code/magnetHoover/magnetHoover.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -684,6 +771,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 309.0,
+	"side_bar_width": 242.0,
 	"status_bar_visible": true
 }
