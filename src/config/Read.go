@@ -1,56 +1,77 @@
 package config
 
 import (
-	"os"
 	"encoding/json"
 	"flag"
-	"time"
+	"fmt"
+	"history"
+	"net/rpc"
+	"os"
+	"plugin"
 	"strings"
+	"time"
 )
 
 var configFile = "config.json"
 
+type ConfigFile struct {
+	Intervall    string
+	Database     string
+	Transmission struct {
+		Host string
+		Port int
+	}
+	URIs []string
+}
+type URI struct {
+	Parser plugin.ParserFunc
+	URI    string
+}
 type Config struct {
-	Intervall time.Duration
-	Urls      []string
+	Intervall    time.Duration
+	History      *history.History
+	Transmission *rpc.Client
+	URIs         []URI
 }
 
-func (c *Config) Tic() <-chan time.Time {
-	return time.After(c.Intervall)
-}
-
-func FromCmdl(config* Config) error {
-	var notFromFile bool
-	var url string
-	
-	flag.BoolVar(&notFromFile, "n", false, "don't read config file")
-	flag.BoolVar(&notFromFile, "noread", false, "don't read config file")
-	flag.StringVar(&configFile, "c", configFile, "config file")
+func FromCmdl() (*Config, error) {
 	flag.StringVar(&configFile, "config", configFile, "config file")
-	flag.DurationVar(&config.Intervall, "i", 5*time.Minute, "intervall between to polls")
-	flag.DurationVar(&config.Intervall, "intervall", 5*time.Minute, "intervall between to polls")
-	flag.StringVar(&url, "u", "", "url to poll")
-	flag.StringVar(&url, "url", "", "url to poll")
 	flag.Parse()
-	config.Urls = strings.Split(url, ",")
-	if notFromFile {
-		return nil
-	}
-	if len(config.Urls) == 1 && len(config.Urls[0]) == 0 {
-		config.Urls = []string{"http://eztv.it/shows/682/chicago-fire/"}
-	}
-	return FromFile(config)
+	return FromFile()
 }
 
-func FromFile(config* Config) error {
+func FromFile() (c *Config, err error) {
+	var cf ConfigFile
+	c = new(Config)
 	file, err := os.Open(configFile)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&config)
+	err = decoder.Decode(&cf)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+
+	if c.Intervall, err = time.ParseDuration(cf.Intervall); err != nil {
+		fmt.Println(err)
+		c.Intervall = 5 * time.Minute
+	}
+	if c.History, err = history.New(cf.Database); err != nil {
+		return nil, err
+	}
+	address := fmt.Sprintf("%s:%d", cf.Transmission.Host, cf.Transmission.Port)
+	if c.Transmission, err = rpc.Dial("tcp", address); err != nil {
+		return nil, err
+	}
+	for _, uri := range cf.URIs {
+		parser := plugin.Default
+		parts := strings.Split(uri, "§")
+		if len(parts) > 1 {
+			parser = plugin.Parser(parts[0])
+			uri = parts[1]
+		}
+		c.URIs = append(c.URIs, URI{parser, uri})
+	}
+	return
 }

@@ -1,0 +1,14 @@
+{
+	"Intervall":	"5m",
+	"Database":		"read.sqlite3",
+	"Transmission":
+	{
+		"Host":		"localhost",
+		"Port":		9091
+	},
+	"URIs":
+	[
+		"EZTV§http://eztv.it/shows/682/chicago-fire/",
+		"EZTV§http://eztv.it/shows/554/new-girl/"
+	]
+}
