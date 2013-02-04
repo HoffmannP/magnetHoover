@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"net/rpc"
 	"os/signal"
 	"syscall"
 	"time"
@@ -13,13 +14,27 @@ import (
 
 type sigRec chan os.Signal
 type cfg config.Config
+type cl rpc.Client
+
+type rpc_command struct {
+	method string
+	arguments struct {
+		filename string
+	}
+}
+func (r *cl) add(file string) error {
+	rpc := new(rpc_command)
+	rpc.method = "add_torrent"
+	rpc.arguments.filename = file
+	return (*rpc(r)).Call(rpc)
+}
 
 func main() {
 	c, err := config.FromCmdl()
 	if err != nil {
 		panic(err)
 	}
-	defer c.History.Close()
+	defer (*cfg(c)).Close()
 
 	s := make(chan os.Signal)
 	signal.Notify(s)
@@ -93,7 +108,7 @@ func (c *cfg) poll(u config.URI, end chan bool) {
 			fmt.Printf("%s already added\n", id)
 			continue
 		}
-		if err = c.addTorrent(url); err == nil {
+		if err = c.Transmission.add(url); err == nil {
 			if err = c.History.Add(id); err != nil {
 				fmt.Printf("SQL Add Error »%s«: %v\n", id, err)
 			}
@@ -103,9 +118,9 @@ func (c *cfg) poll(u config.URI, end chan bool) {
 	return
 }
 
-func (c *cfg) addTorrent(u string) error {
-	println(u)
-	return nil
+func (c *cfg) Close() {
+	c.History.Close()
+	c.Transmission.Close()
 }
 
 func readAll(r io.Reader) string {
