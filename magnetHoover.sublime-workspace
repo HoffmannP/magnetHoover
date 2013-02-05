@@ -379,7 +379,7 @@
 			"file": "src/magnetHoover.go",
 			"settings":
 			{
-				"buffer_size": 2381,
+				"buffer_size": 1746,
 				"line_ending": "Unix"
 			}
 		},
@@ -387,7 +387,7 @@
 			"file": "config.json",
 			"settings":
 			{
-				"buffer_size": 225,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -395,7 +395,7 @@
 			"file": "src/config/Read.go",
 			"settings":
 			{
-				"buffer_size": 1458,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -403,7 +403,23 @@
 			"file": "src/history/history.go",
 			"settings":
 			{
-				"buffer_size": 1223,
+				"buffer_size": 1252,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/test.go",
+			"settings":
+			{
+				"buffer_size": 583,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "magnetHoover.sublime-project",
+			"settings":
+			{
+				"buffer_size": 558,
 				"line_ending": "Unix"
 			}
 		}
@@ -646,7 +662,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -654,15 +670,15 @@
 					"file": "src/magnetHoover.go",
 					"settings":
 					{
-						"buffer_size": 2381,
+						"buffer_size": 1746,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								389,
-								389
+								0,
+								0
 							]
 						],
 						"settings":
@@ -681,15 +697,15 @@
 					"file": "config.json",
 					"settings":
 					{
-						"buffer_size": 225,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								130,
-								130
+								0,
+								0
 							]
 						],
 						"settings":
@@ -708,15 +724,15 @@
 					"file": "src/config/Read.go",
 					"settings":
 					{
-						"buffer_size": 1458,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								611,
-								611
+								0,
+								0
 							]
 						],
 						"settings":
@@ -735,15 +751,15 @@
 					"file": "src/history/history.go",
 					"settings":
 					{
-						"buffer_size": 1223,
+						"buffer_size": 1252,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								392,
-								392
+								0,
+								0
 							]
 						],
 						"settings":
@@ -753,6 +769,60 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 127.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/test.go",
+					"settings":
+					{
+						"buffer_size": 583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24,
+								24
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/GoSublime.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "magnetHoover.sublime-project",
+					"settings":
+					{
+						"buffer_size": 558,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								463,
+								463
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

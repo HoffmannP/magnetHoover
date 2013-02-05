@@ -4,11 +4,11 @@
 	"Transmission":
 	{
 		"Host":		"localhost",
-		"Port":		9091
+		"Port":		9091,
+		"SSL":		false
 	},
 	"URIs":
 	[
-		"EZTV§http://eztv.it/shows/682/chicago-fire/",
-		"EZTV§http://eztv.it/shows/554/new-girl/"
+		...
 	]
 }

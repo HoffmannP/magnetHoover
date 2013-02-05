@@ -1,11 +1,9 @@
 package transmission
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -16,7 +14,8 @@ const session_header_key = "X-Transmission-Session-Id"
 
 type request struct {
 	u string
-	t int64
+	r []byte
+	p int
 }
 
 type response struct {
@@ -57,16 +56,26 @@ func NewClient(ssl bool, host string, port int) (*Client, error) {
 }
 
 func request_add(uri string) *request {
-	return &request{uri, 0}
+	r := new(request)
+	r.u = uri
+	return r
 }
 func (r *request) tag(t int64) {
-	r.t = t
+	b := "{'method': 'torrent-add', 'arguments': {'filename': '%s'}, 'tag': %d}"
+	r.r = ([]byte)(strings.Replace(fmt.Sprintf(b, r.u, t), "'", "\"", -1))
+	log.Printf("%s", r.r)
 }
-func (r *request) Read(d []byte) (int, error) {
-	t := "{'method': 'torrent-add', 'arguments': {'filename': '%s'}, 'tag': %d}"
-	b := bytes.NewBufferString(strings.Replace(fmt.Sprintf(t, r.u, r.t), "'", "\"", -1))
-	n, err := b.Read(d)
-	return n, err
+func (q *request) Read(r []byte) (n int, err error) {
+	n = len(r)
+	if q.p+n > len(q.r) {
+		r = r[:len(q.r)-q.p]
+		n = len(r)
+		err = errors.New("EOF")
+	}
+	r = q.r[q.p : q.p+n]
+	fmt.Println(".", r, ".", q.r, ".", q.p, q.p+n)
+	q.p = q.p + n
+	return
 }
 
 func (c *Client) Call(r *request) error {
@@ -74,39 +83,42 @@ func (c *Client) Call(r *request) error {
 	c.n++
 	r.tag(tag)
 
-	req, err := http.NewRequest("POST", c.a, io.Reader(r))
-	if err != nil {
-		return err
-	}
-	req.Header.Set(session_header_key, c.s)
-	req.Header.Set("Content-Type", "application/json")
-	fmt.Printf("PreSend: %v\n", req)
+	/*
+		req, err := http.NewRequest("POST", c.a, r)
+		if err != nil {
+			log.Fatal(err)
+		}
+		req.Header.Set(session_header_key, c.s)
+		req.Header.Set("Content-Type", "application/json")
+		req.Close = true
+		log.Printf("Sending %v", req)
+	*/
 
-	res, err := c.c.Do(req)
+	buffer := make([]byte, 200)
+	n, err := r.Read(buffer)
 	if err != nil {
-		return err
+		log.Print(err)
 	}
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	robots, err := ioutil.ReadAll(res.Body)
-	res.Body.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%s", robots)
+	fmt.Printf("<%s>:%T#%d\n", buffer, buffer, n)
 
 	/*
-		var s response
-		err = json.NewDecoder(res.Body).Decode(&s)
-		res.Body.Close()
+		res, err := c.c.Do(req)
+		defer res.Body.Close()
 		if err != nil {
-			return err
+			log.Fatal(err)
 		}
-		if s.Tag != c.n || s.Result != "success" {
-			return errors.New(fmt.Sprintf("RPC Torrent Add Error »%s«", s.Result))
-		}
+
+		log.Println("Sent")
+
+			var s response
+			err = json.NewDecoder(res.Body).Decode(&s)
+			res.Body.Close()
+			if err != nil {
+				return err
+			}
+			if s.Tag != c.n || s.Result != "success" {
+				return errors.New(fmt.Sprintf("RPC Torrent Add Error »%s«", s.Result))
+			}
 	*/
 	return nil
 }
