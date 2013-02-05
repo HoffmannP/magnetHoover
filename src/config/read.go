@@ -5,11 +5,11 @@ import (
 	"flag"
 	"fmt"
 	"history"
-	"net/rpc"
 	"os"
 	"plugin"
 	"strings"
 	"time"
+	"transmission"
 )
 
 var configFile = "config.json"
@@ -20,6 +20,7 @@ type ConfigFile struct {
 	Transmission struct {
 		Host string
 		Port int
+		SSL  bool
 	}
 	URIs []string
 }
@@ -30,7 +31,7 @@ type URI struct {
 type Config struct {
 	Intervall    time.Duration
 	History      *history.History
-	Transmission *rpc.Client
+	Transmission *transmission.Client
 	URIs         []URI
 }
 
@@ -60,8 +61,7 @@ func FromFile() (c *Config, err error) {
 	if c.History, err = history.New(cf.Database); err != nil {
 		return nil, err
 	}
-	address := fmt.Sprintf("%s:%d", cf.Transmission.Host, cf.Transmission.Port)
-	if c.Transmission, err = rpc.Dial("tcp", address); err != nil {
+	if c.Transmission, err = transmission.NewClient(cf.Transmission.SSL, cf.Transmission.Host, cf.Transmission.Port); err != nil {
 		return nil, err
 	}
 	for _, uri := range cf.URIs {
@@ -74,4 +74,8 @@ func FromFile() (c *Config, err error) {
 		c.URIs = append(c.URIs, URI{parser, uri})
 	}
 	return
+}
+
+func (c *Config) Close() {
+	c.History.Close()
 }

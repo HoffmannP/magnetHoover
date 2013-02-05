@@ -4,9 +4,9 @@ import (
 	"config"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
-	"net/rpc"
 	"os/signal"
 	"syscall"
 	"time"
@@ -14,27 +14,13 @@ import (
 
 type sigRec chan os.Signal
 type cfg config.Config
-type cl rpc.Client
-
-type rpc_command struct {
-	method string
-	arguments struct {
-		filename string
-	}
-}
-func (r *cl) add(file string) error {
-	rpc := new(rpc_command)
-	rpc.method = "add_torrent"
-	rpc.arguments.filename = file
-	return (*rpc(r)).Call(rpc)
-}
 
 func main() {
 	c, err := config.FromCmdl()
 	if err != nil {
 		panic(err)
 	}
-	defer (*cfg(c)).Close()
+	defer c.Close()
 
 	s := make(chan os.Signal)
 	signal.Notify(s)
@@ -43,7 +29,7 @@ func main() {
 
 func (s sigRec) circleOfLife(c *cfg) {
 	c.poll_all()
-	run := false // true
+	run := true
 	for run {
 		select {
 		case <-c.Tic():
@@ -71,6 +57,7 @@ func (c *cfg) Tic() <-chan time.Time {
 }
 
 func (c *cfg) poll_all() {
+	println("Tic")
 	max, end := 0, make(chan bool)
 	for _, u := range c.URIs {
 		max++
@@ -91,7 +78,13 @@ func (c *cfg) poll(u config.URI, end chan bool) {
 		fmt.Println(err)
 	}
 	defer response.Body.Close()
-	es, err := u.Parser(readAll(response.Body))
+	bs, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		fmt.Println(err)
+		end <- false
+		return
+	}
+	es, err := u.Parser(string(bs))
 	if err != nil {
 		fmt.Println(err)
 		end <- false
@@ -101,36 +94,19 @@ func (c *cfg) poll(u config.URI, end chan bool) {
 		end <- false
 		return
 	}
-	c.History.Select(u.URI)
 	for _, e := range es {
 		id, url := e[0], e[1]
 		if c.History.Exists(id) {
 			fmt.Printf("%s already added\n", id)
 			continue
 		}
-		if err = c.Transmission.add(url); err == nil {
-			if err = c.History.Add(id); err != nil {
-				fmt.Printf("SQL Add Error »%s«: %v\n", id, err)
-			}
+
+		if err = c.Transmission.Add(url); err != nil {
+			fmt.Printf("Transmission Add Error »%s«: %v\n", url, err)
+			panic(err)
+			c.History.Add(id)
 		}
 	}
 	end <- true
 	return
-}
-
-func (c *cfg) Close() {
-	c.History.Close()
-	c.Transmission.Close()
-}
-
-func readAll(r io.Reader) string {
-	const slicesize = 1 << 10
-	text := make([]byte, slicesize)
-	n, err := r.Read(text)
-	for err == nil {
-		tmp := make([]byte, slicesize)
-		n, err = r.Read(tmp)
-		text = append(text, tmp[:n]...)
-	}
-	return string(text)
 }
