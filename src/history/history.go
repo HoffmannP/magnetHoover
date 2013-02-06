@@ -27,7 +27,7 @@ func New(n string) (*History, error) {
 	}
 
 	h := &History{db, make(chan string)}
-	go h.Adder()
+	go h.adder()
 	return h, nil
 }
 
@@ -40,7 +40,7 @@ func (h *History) Exists(url string) bool {
 	return count > 0
 }
 
-func (h *History) Adder() {
+func (h *History) adder() {
 	for url := range h.q {
 		_, err := h.db.Exec("INSERT INTO `" + torrents_table + "` VALUES (\"" + url + "\")")
 		if err != nil {

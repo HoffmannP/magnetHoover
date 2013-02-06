@@ -6,19 +6,7 @@ import (
 )
 
 func main() {
-	/*
-		res, err := http.Get("http://www.google.de/robots.txt")
-		if err != nil {
-			log.Fatal(err)
-		}
-		robots, err := ioutil.ReadAll(res.Body)
-		res.Body.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Printf("%s", robots)
-	*/
-	c, err := transmission.NewClient(false, "localhost", 9091)
+	c, err := transmission.NewClient(false, "127.0.0.1", 9091)
 	if err != nil {
 		log.Fatalln(err)
 	}

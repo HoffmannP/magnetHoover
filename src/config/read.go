@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"history"
 	"os"
-	"plugin"
+	"parser"
 	"strings"
 	"time"
 	"transmission"
@@ -65,13 +65,13 @@ func FromFile() (c *Config, err error) {
 		return nil, err
 	}
 	for _, uri := range cf.URIs {
-		parser := plugin.Default
+		parser_name = "Default"
 		parts := strings.Split(uri, "§")
 		if len(parts) > 1 {
-			parser = plugin.Parser(parts[0])
+			parser_name = parts[0]
 			uri = parts[1]
 		}
-		c.URIs = append(c.URIs, URI{parser, uri})
+		c.URIs = append(c.URIs, URI{parser.Parser(parser_name), uri})
 	}
 	return
 }

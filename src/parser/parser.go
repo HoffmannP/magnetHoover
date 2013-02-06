@@ -1,4 +1,4 @@
-package plugin
+package parser
 
 type ParserFunc func(string) ([][]string, error)
 type parserList map[string]ParserFunc
@@ -12,12 +12,12 @@ func register(n string, p ParserFunc) {
 	parsers[n] = p
 }
 
-func Default(body string) ([][]string, error) {
+func defaultParserFunc(body string) ([][]string, error) {
 	return nil, nil
 }
 
-func Parser(n string) ParserFunc {
-	p, ok := parsers[n]
+func Parser(p string) ParserFunc {
+	p, ok := parsers[p]
 	if !ok {
 		return parsers["Default"]
 	}
@@ -25,5 +25,5 @@ func Parser(n string) ParserFunc {
 }
 
 func init() {
-	register("Default", Default)
+	register("Default", defaultParserFunc)
 }

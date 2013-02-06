@@ -10,7 +10,7 @@ func sel(n *h5.Node, selector string) []*h5.Node {
 	return transform.NewSelectorQuery(selector).Apply(n)
 }
 
-func EZTV(b string) (e [][]string, err error) {
+func eztv(b string) (e [][]string, err error) {
 	h := strings.Replace(b, "<center>", "", 1) // repair (remove) first unclosed <center> tag
 	p := h5.NewParserFromString(string(h))
 	if err = p.Parse(); err != nil {
@@ -49,5 +49,5 @@ func eztvLinkHref(a *h5.Node) string {
 }
 
 func init() {
-	register("EZTV", EZTV)
+	register("EZTV", eztv)
 }
