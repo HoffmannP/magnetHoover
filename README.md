@@ -20,7 +20,7 @@ Unfortunately there are no comments in json-files here are the comments for `con
     * Host(String): IP or Hostname where your Transmission daemon is running
     * Port(Integer): Portnumber of your Transmission daemon is running
     * SSL(Bool): Whether SSL (https) should be used as transport communication with your Transmission daemon
-* URIs(Array of Strings): A number of URLs or Identifiers possibliy prefixed with and seperated using the paragraph sign (§) by the name of a parser plugin 
+* URIs(Array of Strings): A number of URLs or Identifiers possibliy prefixed with and seperated using the paragraph sign (`§`) by the name of a parser plugin 
 
 Parser plugins
 --------------
