@@ -24,5 +24,8 @@ Parser plugins have to satisfy the `ParserRawFunc` and `UrlFunc` type of the `pa
  * Larger time units
  * Test HTTPS Support
  * Transmission Authentication
+ * Write Tests
+ * Think about organizing the source code
+ * Implement external parser plugins
  * …?
 
