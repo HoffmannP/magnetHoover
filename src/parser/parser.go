@@ -1,29 +1,56 @@
 package parser
 
-type ParserFunc func(string) ([][]string, error)
-type parserList map[string]ParserFunc
+import (
+	"log"
+	"strings"
+)
 
-var parsers map[string]ParserFunc
+type ParserRawFunc func(string) ([][]string, error)
+type _ struct{} // only for syntax highlighting in GoSublime
+type ParserFunc func() ([][]string, error)
+type _ struct{} // only for syntax highlighting in GoSublime
 
-func register(n string, p ParserFunc) {
+type UrlFunc func(string) (string, error)
+
+type parserPlugin struct {
+	p ParserRawFunc
+	u UrlFunc
+}
+
+var parsers map[string]parserPlugin
+
+func register(n string, p ParserRawFunc, u UrlFunc) {
 	if parsers == nil {
-		parsers = make(parserList, 10)
+		parsers = make(map[string]parserPlugin, 10)
 	}
-	parsers[n] = p
+	parsers[n] = parserPlugin{p, u}
 }
 
-func defaultParserFunc(body string) ([][]string, error) {
-	return nil, nil
-}
-
-func Parser(p string) ParserFunc {
-	p, ok := parsers[p]
+func Parser(id string) ParserFunc {
+	// Which Parser
+	name := "Default"
+	parts := strings.Split(id, "§")
+	if len(parts) > 1 {
+		name = parts[0]
+		id = parts[1]
+	}
+	pl, ok := parsers[name]
 	if !ok {
-		return parsers["Default"]
+		pl = parsers["Default"]
 	}
-	return p
+
+	// Extract uri from page/feed id
+	uri, err := pl.u(id)
+	if err != nil {
+		log.Println(err)
+	}
+	return func() ([][]string, error) {
+		return pl.p(uri)
+	}
 }
 
 func init() {
-	register("Default", defaultParserFunc)
+	register("Default",
+		func(body string) ([][]string, error) { return nil, nil },
+		func(uri string) (string, error) { return uri, nil })
 }

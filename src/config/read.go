@@ -5,9 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"history"
+	"log"
 	"os"
 	"parser"
-	"strings"
 	"time"
 	"transmission"
 )
@@ -24,15 +24,11 @@ type ConfigFile struct {
 	}
 	URIs []string
 }
-type URI struct {
-	Parser plugin.ParserFunc
-	URI    string
-}
 type Config struct {
 	Intervall    time.Duration
 	History      *history.History
 	Transmission *transmission.Client
-	URIs         []URI
+	URIs         []parser.ParserFunc
 }
 
 func FromCmdl() (*Config, error) {
@@ -48,30 +44,21 @@ func FromFile() (c *Config, err error) {
 	if err != nil {
 		return nil, err
 	}
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&cf)
-	if err != nil {
+	if err := json.NewDecoder(file).Decode(&cf); err != nil {
 		return nil, err
 	}
-
 	if c.Intervall, err = time.ParseDuration(cf.Intervall); err != nil {
 		fmt.Println(err)
 		c.Intervall = 5 * time.Minute
 	}
 	if c.History, err = history.New(cf.Database); err != nil {
-		return nil, err
+		log.Fatal("History: ", err)
 	}
 	if c.Transmission, err = transmission.NewClient(cf.Transmission.SSL, cf.Transmission.Host, cf.Transmission.Port); err != nil {
-		return nil, err
+		log.Fatal("Transmission: ", err)
 	}
 	for _, uri := range cf.URIs {
-		parser_name = "Default"
-		parts := strings.Split(uri, "§")
-		if len(parts) > 1 {
-			parser_name = parts[0]
-			uri = parts[1]
-		}
-		c.URIs = append(c.URIs, URI{parser.Parser(parser_name), uri})
+		c.URIs = append(c.URIs, parser.Parser(uri))
 	}
 	return
 }

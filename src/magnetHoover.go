@@ -2,10 +2,7 @@ package main
 
 import (
 	"config"
-	"fmt"
-	"io"
-	"io/ioutil"
-	"net/http"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -39,14 +36,17 @@ func (s sigRec) circleOfLife(c *cfg) {
 			case syscall.SIGINT:
 				run = false
 			case syscall.SIGHUP:
-				fmt.Print("Rereading config file ")
+				log.Print("Rereading config file…")
 				c_tmp, err := config.FromFile()
 				if err == nil {
 					c = (*cfg)(c_tmp)
-					fmt.Println("Sucess")
+					log.Println("Success")
+					c.poll_all()
 				} else {
-					fmt.Println("FAIL")
+					log.Println("Fail", err)
 				}
+			default:
+				log.Printf("Received signal »%s«\n", si)
 			}
 		}
 	}
@@ -57,11 +57,11 @@ func (c *cfg) Tic() <-chan time.Time {
 }
 
 func (c *cfg) poll_all() {
-	println("Tic")
+	// log.Println("Tic")
 	max, end := 0, make(chan bool)
-	for _, u := range c.URIs {
+	for _, p := range c.URIs {
 		max++
-		go c.poll(u, end)
+		go c.poll(p, end)
 	}
 	for max > 0 {
 		select {
@@ -69,24 +69,14 @@ func (c *cfg) poll_all() {
 			max--
 		}
 	}
+	// log.Println("Tac")
 	return
 }
 
-func (c *cfg) poll(u config.URI, end chan bool) {
-	response, err := http.Get(u.URI)
+func (c *cfg) poll(p func() ([][]string, error), end chan bool) {
+	es, err := p()
 	if err != nil {
-		fmt.Println(err)
-	}
-	defer response.Body.Close()
-	bs, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		fmt.Println(err)
-		end <- false
-		return
-	}
-	es, err := u.Parser(string(bs))
-	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		end <- false
 		return
 	}
@@ -97,15 +87,14 @@ func (c *cfg) poll(u config.URI, end chan bool) {
 	for _, e := range es {
 		id, url := e[0], e[1]
 		if c.History.Exists(id) {
-			fmt.Printf("%s already added\n", id)
+			// log.Printf("%s already added\n", id)
 			continue
 		}
 
 		if err = c.Transmission.Add(url); err != nil {
-			fmt.Printf("Transmission Add Error »%s«: %v\n", url, err)
-			panic(err)
-			c.History.Add(id)
+			log.Printf("Transmission Add Error »%s«: %v\n", url, err)
 		}
+		c.History.Add(id)
 	}
 	end <- true
 	return

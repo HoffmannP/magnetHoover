@@ -47,9 +47,16 @@ func NewClient(ssl bool, host string, port int) (*Client, error) {
 		"",
 		time.Now().Unix() * 1000}
 
-	r, err := http.DefaultClient.Head(c.a)
+	var err error
+	var r *http.Response
+	for i := 0; i < 2; i++ {
+		r, err = http.DefaultClient.Head(c.a)
+		if err == nil {
+			break
+		}
+	}
 	if err != nil {
-		return nil, err
+		log.Fatal("Can't connect to Transmission:", err)
 	}
 	if r.StatusCode != 409 {
 		return nil, errors.New(fmt.Sprintf("Unexpected status return code »%d« (wrong address?)", r.StatusCode))
@@ -75,9 +82,7 @@ func (q *request) Read(r []byte) (n int, err error) {
 }
 
 func (c *Client) Call(r *request) error {
-	tag := c.n
-	c.n++
-	r.tag(tag)
+	r.tag(c.n)
 
 	req, err := http.NewRequest("POST", c.a, r)
 	if err != nil {
@@ -97,7 +102,7 @@ func (c *Client) Call(r *request) error {
 	if err != nil {
 		return err
 	}
-	if s.Tag != c.n || s.Result != "success" {
+	if s.Result != "success" {
 		return errors.New(fmt.Sprintf("RPC Torrent Add Error »%s«", s.Result))
 	}
 	return nil
