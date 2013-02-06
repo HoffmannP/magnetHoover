@@ -1,2 +1,8 @@
 read.sqlite3
 config.json
+bin
+pkg
+magnetHoover
+rpc-spec.txt
+*.sublime-project
+*.sublime-workspace
