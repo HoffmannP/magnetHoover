@@ -1,7 +1,7 @@
 package main
 
 import (
-	"config"
+	"github.com/HoffmannP/magnetHoover/config"
 	"log"
 	"os"
 	"os/signal"

@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"history"
+	"github.com/HoffmannP/magnetHoover/history"
 	"log"
 	"os"
-	"parser"
+	"github.com/HoffmannP/magnetHoover/parser"
 	"time"
-	"transmission"
+	"github.com/HoffmannP/magnetHoover/transmission"
 )
 
 var configFile = "config.json"
