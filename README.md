@@ -5,11 +5,9 @@ The purpose of this project is to provide a lighwith compiled daemon scanning to
 Build
 -----
 install go on your system, change in the main folder of this project and run
-	
-	export GOPATH="$(pwd)"
-    go install build
+    go get github.com/HoffmannP/magnetHoover	
 
-If no errors occure you should find the executabel as `bin/main`
+If no errors occur you should find the executable as `$GOPATH/bin/magnetHoover`
 
 Config
 ------
