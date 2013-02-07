@@ -4,7 +4,8 @@ The purpose of this project is to provide a lighwith compiled daemon scanning to
 
 Build
 -----
-install go on your system, change in the main folder of this project and run
+Obviously you need *go* installed on your system. To build the binary run
+
     go get github.com/HoffmannP/magnetHoover	
 
 If no errors occur you should find the executable as `$GOPATH/bin/magnetHoover`
