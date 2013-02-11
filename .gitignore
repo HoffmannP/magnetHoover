@@ -6,3 +6,5 @@ magnetHoover
 rpc-spec.txt
 *.sublime-project
 *.sublime-workspace
+magnetHoover.log
+src

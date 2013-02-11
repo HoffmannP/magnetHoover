@@ -34,5 +34,6 @@ TODO
  * Write Tests
  * Think about organizing the source code
  * Implement external parser plugins
+ * Stabelize HTML Parsing
  * …?
 

@@ -40,7 +40,20 @@ func eztvParser(uri string) (e [][]string, err error) {
 	return
 }
 
+func cleanID(id string) string {
+	id = strings.ToLower(id)
+	if len(id) > 3 && id[0:3] == "the" {
+		id = id[3:]
+	}
+	if len(id) > 3 && id[len(id)-3:] == "the" {
+		id = id[:len(id)-3]
+	}
+	id = strings.Trim(id, ", ().;")
+	return id
+}
+
 func eztvUrl(id string) (string, error) {
+	id = cleanID(id)
 	res, err := http.Get("http://eztv.it/showlist/")
 	if err != nil {
 		return id, err
@@ -57,7 +70,7 @@ func eztvUrl(id string) (string, error) {
 	rows := sel(p.Tree(), "tr[name=hover]")
 	for _, row := range rows {
 		a := sel(sel(row, "td.forum_thread_post")[0], "a")[0]
-		if a.Children[0].Data() == id {
+		if cleanID(a.Children[0].Data()) == id {
 			for _, attr := range a.Attr {
 				if attr.Name == "href" {
 					return "http://eztv.it" + attr.Value, nil
@@ -66,7 +79,7 @@ func eztvUrl(id string) (string, error) {
 			return id, errors.New("URI not found")
 		}
 	}
-	return id, errors.New("Show not found")
+	return id, errors.New("Show «" + id + "» not found")
 }
 
 func eztvSnipp(r *h5.Node) []string {

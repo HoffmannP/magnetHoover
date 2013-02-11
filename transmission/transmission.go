@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -56,7 +55,7 @@ func NewClient(ssl bool, host string, port int) (*Client, error) {
 		}
 	}
 	if err != nil {
-		log.Fatal("Can't connect to Transmission:", err)
+		return nil, err
 	}
 	if r.StatusCode != 409 {
 		return nil, errors.New(fmt.Sprintf("Unexpected status return code »%d« (wrong address?)", r.StatusCode))
@@ -110,8 +109,5 @@ func (c *Client) Call(r *request) error {
 
 func (c Client) Add(uri string) error {
 	err := c.Call(request_add(uri))
-	if err != nil {
-		log.Println(err)
-	}
-	return nil
+	return err
 }

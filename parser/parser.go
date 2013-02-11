@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"log"
 	"strings"
 )
 
@@ -23,10 +22,13 @@ func register(n string, p ParserRawFunc, u UrlFunc) {
 	if parsers == nil {
 		parsers = make(map[string]parserPlugin, 10)
 	}
+	if u == nil {
+		u = func(uri string) (string, error) { return uri, nil }
+	}
 	parsers[n] = parserPlugin{p, u}
 }
 
-func Parser(id string) ParserFunc {
+func Parser(id string) (ParserFunc, error) {
 	// Which Parser
 	name := "Default"
 	parts := strings.Split(id, "§")
@@ -42,11 +44,11 @@ func Parser(id string) ParserFunc {
 	// Extract uri from page/feed id
 	uri, err := pl.u(id)
 	if err != nil {
-		log.Println(err)
+		return nil, err
 	}
 	return func() ([][]string, error) {
 		return pl.p(uri)
-	}
+	}, nil
 }
 
 func init() {

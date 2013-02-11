@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/HoffmannP/magnetHoover/config"
+	// "github.com/HoffmannP/magnetHoover/config"
+	"config"
 	"log"
 	"os"
 	"os/signal"
@@ -13,15 +14,21 @@ type sigRec chan os.Signal
 type cfg config.Config
 
 func main() {
+	log.Println("Starting magnetHoover")
 	c, err := config.FromCmdl()
 	if err != nil {
-		panic(err)
+		if c == nil {
+			log.Fatal(err)
+		} else {
+			c.Logger.Print("..")
+		}
 	}
 	defer c.Close()
 
 	s := make(chan os.Signal)
-	signal.Notify(s)
+	signal.Notify(s, signal.)
 	sigRec(s).circleOfLife((*cfg)(c))
+	log.Println("Closing magnetHoover")
 }
 
 func (s sigRec) circleOfLife(c *cfg) {
@@ -33,20 +40,22 @@ func (s sigRec) circleOfLife(c *cfg) {
 			c.poll_all()
 		case si := <-s:
 			switch si {
+			case syscall.SIGTERM:
+				run = false
 			case syscall.SIGINT:
 				run = false
 			case syscall.SIGHUP:
-				log.Print("Rereading config file…")
+				c.Logger.Print("Rereading config file…")
 				c_tmp, err := config.FromFile()
 				if err == nil {
 					c = (*cfg)(c_tmp)
-					log.Println("Success")
+					c.Logger.Print("Successfully reload config file")
 					c.poll_all()
 				} else {
-					log.Println("Fail", err)
+					c.Logger.Print("Error reloading config file (using old values)", err)
 				}
 			default:
-				log.Printf("Received signal »%s«\n", si)
+				c.Logger.Printf("Received signal »%s«", si)
 			}
 		}
 	}
@@ -57,7 +66,6 @@ func (c *cfg) Tic() <-chan time.Time {
 }
 
 func (c *cfg) poll_all() {
-	// log.Println("Tic")
 	max, end := 0, make(chan bool)
 	for _, p := range c.URIs {
 		max++
@@ -69,14 +77,13 @@ func (c *cfg) poll_all() {
 			max--
 		}
 	}
-	// log.Println("Tac")
 	return
 }
 
 func (c *cfg) poll(p func() ([][]string, error), end chan bool) {
 	es, err := p()
 	if err != nil {
-		log.Println(err)
+		c.Logger.Print(err)
 		end <- false
 		return
 	}
@@ -86,14 +93,20 @@ func (c *cfg) poll(p func() ([][]string, error), end chan bool) {
 	}
 	for _, e := range es {
 		id, url := e[0], e[1]
-		if c.History.Exists(id) {
-			// log.Printf("%s already added\n", id)
+		switch exists, err := c.History.Exists(id); {
+		case err != nil:
+			c.Logger.Printf(err.Error())
+			continue
+		case exists:
+			c.Logger.Printf("%s already added\n", id)
 			continue
 		}
-
 		if err = c.Transmission.Add(url); err != nil {
-			log.Printf("Transmission Add Error »%s«: %v\n", url, err)
+			c.Logger.Printf("Transmission Add Error »%s«: %v\n", url, err)
+		} else {
+			c.Logger.Printf("Added »%s«", url)
 		}
+
 		c.History.Add(id)
 	}
 	end <- true
